@@ -28,11 +28,11 @@ Table *departments*
 ** INNER JOIN
 Returns only rows *where there is a match* in both tables
 
-#+BEGIN-SRC SQL
+#+BEGIN_SRC sql
 SELECT e.name, d.dept_name FROM employees AS e
 INNER JOIN departments AS d
    ON e.dept_id = d.dept_id;
-#+END-SRC
+#+END_SRC
 
 Result:
 | name  | dept_name   |
@@ -46,11 +46,11 @@ Charlie is expluded as his dept_id is NULL
 ** LEFT JOIN
 Returns all rows from the left table (employees), pkus mathced rows from the right table. Unmatched tight-side colums become NULL
 
-#+BEGIN-SRC SQL
+#+BEGIN_SRC sql
 SELECT e.name, d.dept_name FROM employees AS e
 LEFT JOIN departments AS d
   ON e.dept_id = d.dept_id;
-#+END-SRC
+#+END_SRC
 
 Result:
 | name    | dept_name   |
@@ -65,11 +65,11 @@ Charlie will appear with NULL dept_name because there is no matching dept_id
 ** RIGHT JOIN
 Returns *all rows from the right table* (departments), plus matched rows from the left table. Unmatched left-side colums become NULL
 
-#+BEGIN-SRC SQL
+#+BEGIN_SRC sql
 SELECT e.name, d.dept_name FROM employees AS e
 RIGHT JOIN departments AS d
   ON e.dept_id = d.dept_id;
-#+END-SRC
+#+END_SRC
 
 Result:
 | name   | dept_name   |
@@ -82,12 +82,12 @@ Result:
 ** FULL JOIN
 Returns *all rows from both tables*. Where there’s no match on one side, columns are NULL.
 
-#+BEGIN-SRC SQL
+#+BEGIN_SRC sql
 SELECT e.name, d.dept_name
 FROM employees AS e
 FULL OUTER JOIN departments AS d
   ON e.dept_id = d.dept_id;
-#+END-SRC
+#+END_SRC
 
 Result:
 | name    | dept_name   |
