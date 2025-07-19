@@ -1,0 +1,101 @@
+* SQL Lesson 7 - OUTER JOINs
+In SQL JOINs let you combine rows from 2 tables based on column related to both of the tables.
+
+The 4 main types are:
+- INNER JOIN
+- LEFT JOIN
+- RIGHT JOIN
+- FULL JOIN
+
+Table *employees*
+
+| emp_id | name    | dept_id |
+|--------+---------+---------|
+|      1 | Alice   |       1 |
+|      2 | Bob     |       2 |
+|      3 | Charlie |  (NULL) |
+|      4 | Diana   |       3 |
+
+Table *departments*
+
+| dept_id | dept_name   |
+|---------+-------------|
+|       1 | Engineering |
+|       2 | Sales       |
+|       3 | HR          |
+|       4 | Marketing   |
+
+** INNER JOIN
+Returns only rows *where there is a match* in both tables
+
+#+BEGIN-SRC SQL
+SELECT e.name, d.dept_name FROM employees AS e
+INNER JOIN departments AS d
+   ON e.dept_id = d.dept_id;
+#+END-SRC
+
+Result:
+| name  | dept_name   |
+|-------+-------------|
+| Alice | Engineeting |
+| Bob   | Sales       |
+| Diana | HR          |
+
+Charlie is expluded as his dept_id is NULL
+
+** LEFT JOIN
+Returns all rows from the left table (employees), pkus mathced rows from the right table. Unmatched tight-side colums become NULL
+
+#+BEGIN-SRC SQL
+SELECT e.name, d.dept_name FROM employees AS e
+LEFT JOIN departments AS d
+  ON e.dept_id = d.dept_id;
+#+END-SRC
+
+Result:
+| name    | dept_name   |
+|---------+-------------|
+| Alice   | Engineering |
+| Bob     | Sales       |
+| Charlie | (NULL)      |
+| Diana   | HR          |
+
+Charlie will appear with NULL dept_name because there is no matching dept_id
+
+** RIGHT JOIN
+Returns *all rows from the right table* (departments), plus matched rows from the left table. Unmatched left-side colums become NULL
+
+#+BEGIN-SRC SQL
+SELECT e.name, d.dept_name FROM employees AS e
+RIGHT JOIN departments AS d
+  ON e.dept_id = d.dept_id;
+#+END-SRC
+
+Result:
+| name   | dept_name   |
+| Alice  | Engineering |
+| Bob    | Sales       |
+| Diana  | HR          |
+| (NULL) | Marketing   |
+
+"Marketing" appears with NULL name because no employee is in that dept
+** FULL JOIN
+Returns *all rows from both tables*. Where there’s no match on one side, columns are NULL.
+
+#+BEGIN-SRC SQL
+SELECT e.name, d.dept_name
+FROM employees AS e
+FULL OUTER JOIN departments AS d
+  ON e.dept_id = d.dept_id;
+#+END-SRC
+
+Result:
+| name    | dept_name   |
+|---------+-------------|
+| Alice   | Engineering |
+| Bob     | Sales       |
+| Charlie | (NULL)      |
+| Diana   | HR          |
+| (NULL)  | Marketing   |
+
+Combines the unmatched rows from both tables
