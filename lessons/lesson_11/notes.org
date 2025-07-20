@@ -1,0 +1,16 @@
+#+title: SQL Lesson 11: Queries with aggregates (Pt. 2)
+
+It can be noticed that when the *GROUP BY* clause is being executed after the *WHERE* clause (which filters the rows which are to be grouped) then comes the question - "then how do we filter the groups themselves?"
+
+Luckily, SQL forsaw this problem and added an additional clause *HAVING* that is particularly being used in combination with *GROUP BY* clause
+
+Select query with *HAVING* constraint
+#+BEGIN_SRC sql
+SELECT group_by_column, AGG_FUNC(column_expression) AS aggregate_result_alias, …
+FROM mytable
+WHERE condition
+GROUP BY column
+HAVING group_condition;
+#+END_SRC
+
+The *HAVING* clause constraint is written the same as the *WHERE*, but is applied only to the goups
