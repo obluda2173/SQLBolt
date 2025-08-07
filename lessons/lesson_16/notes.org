@@ -1,0 +1,43 @@
+#+title: SQL Lesson 16: Creating tables
+
+In all of the previous lessons I already used table creation. This lesson will be just a revision and understanding of formalities
+
+How tables are generaly created:
+#+BEGIN_SRC sql
+CREATE TABLE IF NOT EXISTS mytable (
+   column DataType TableConstraint DEFAULT default_value,
+   another_column DataType TableConstraint DEFAULT default_value,
+   ...
+);
+#+END_SRC
+
+The structure of the new table is defined by the table schema, which defines a series of columns. Each columg has a name, the type of data allowed in that column, an optional table constraint on values being inserted, and an optional defaul value
+
+If there already exists a table with the same name, the SQL implementation will usually throw an error, so to suppress the error and skip creating a table in one exists, you can use the *IF NOT EXISTS* clause
+
+* Table data types
+Different databases support different data types, but the common types support numeric, string, and other miscellaneous things like dates, booleans, or even binary data. Here are some examples that you might use in real code:
+
+|----------------------------------+---------------------------------------------------------------------------------------------------------|
+| *Data type*                      | *Description*                                                                                           |
+|----------------------------------+---------------------------------------------------------------------------------------------------------|
+| *INTEGER*                        | Stores whole numbers. Range and size may vary by SQL dialect (e.g. *INT, BIGINT, SMALLINT*)             |
+| *BOOLEAN*                        | Represents logical truth values. Often implemented as 0 (false) and 1 (true) under the hood             |
+| *FLOAT, DOUBLE, REAL*            | Store approximate numeric values with decimal points (REAL is similar to *FLOAT*)                       |
+| *CHAR(n), VARCHAR(n), TEXT*      | *CHAR(n)*: fixed-length, *VARCHAR(n)*: variable-length with maximum size n, *TEXT*: arbitrary-length    |
+| *DATE, TIME, DATETIME/TIMESTAMP* | *DATE*: [year-month-day], *TIME*: [hour-minute-second], *DATETIME/TIMESTAMP*: stores both date and time |
+| *BLOB* (Binary Large Object)     | Stores raw binary data (e.g. images, audio, compressed files)                                           |
+|----------------------------------+---------------------------------------------------------------------------------------------------------|
+* Table constraints
+
+No deep dive into constraints, just the surface knowledge:
+
+|----------------------+--------------------------------------------------------------------------------------------------------------------------------------|
+| *Constraint*         | *Description*                                                                                                                        |
+| *PRIMARY KEY*        | This means that each value of that row is unique, and each value can be used to identify a single row in this table                  |
+| *AUTOINCREMENT*      | For integer values this means that the value is autonomically filled in with each row insertion                                      |
+| *UNIQUE*             | Values in this column have to be unique. You can't insert another row with the same value in this column as another row in the table |
+| *NOT NULL*           | Inserted value can not be `NULL`                                                                                                     |
+| *CHECK (expression)* | Allows to run a more complex expression to test whether the values inserted are valid                                                |
+| *FOREIGN KEY*        | This is a consistency check which ensures that each value in this column corresponds to another value in a column in another table   |
+|----------------------+--------------------------------------------------------------------------------------------------------------------------------------|
