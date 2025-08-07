@@ -1,0 +1,50 @@
+#+title: README
+#+author: Erik An
+
+* Overview
+
+This repository contains my solutions to the [[https://sqlbolt.com][SQLBolt]] interactive SQL tutorials.
+Although SQLBolt includes a built-in SQL runner, I opted to work in Emacs with SQLite and Org-mode to gain a more hands-on understanding of SQL and enhance my proficiency in navigation and note-taking within my development environment.
+
+* Topics Covered
+
+- SELECT statements
+- Filtering with WHERE
+- GROUP BY and aggregate functions
+- JOINs (INNER, LEFT, etc.)
+- Subqueries and nested SELECTs
+- Table modifications: INSERT, UPDATE, DELETE, ALTER
+
+* Structure
+
+- =movies.db= - SQL database used for testing queries
+- =init.sql= - .sql file used to create and initialise the database
+- =queries.sql= - another .sql file used to run the queries on database
+- =notes.org= - .org file to store my notes on SQL
+
+* Setup
+
+Install SQLite (or make sure its installed):
+
+#+BEGIN_SRC shell
+brew install sqlite3     # macOS
+#+END_SRC
+
+To open the database:
+
+#+begin_src shell
+sqlite3 movies.db
+#+end_src
+
+To run queries (inside SQLite):
+
+#+begin_src shell
+.read queries.sql
+#+end_src
+
+* What I learned
+
+- Writing and organizing SQL queries
+- Navigating multi-table relationships using JOINs
+- Query planning and stepwise decomposition with CTEs
+- Clean, repeatable workflow combining SQLite and Emacs
