@@ -1,0 +1,32 @@
+#+title: SQL Lesson 17: Altering tables
+
+As data changes over time, SQL provides a way for you to update your corresponding tables and database shemas by using the *ALTER TABLE* statement to add, remove, or modify columns and table constraints
+
+* Adding column
+
+The syntax for adding a new column is similar to the syntax when creating new rows in the *CREATE TABLE* statement. You need to specify the data type of the column along with any potential table constraints and default values to be applied to both existing and new rows. In some databases like MySQL, you can even specify where to insert the new column using the FIRST or AFTER clauses though this is not a standard feature
+
+#+BEGIN_SRC sql
+ALTER TABLE mytable
+ADD column DataType OptionalTableConstraint
+    DEFAULT default_value;
+#+END_SRC
+
+
+* Removing column
+
+Dropping columns is as easy as specifying the column to drop, however, some databases (including SQLite) don't support this feature. Instead you may have to create a new table and migrate the data over
+
+#+BEGIN_SRC sql
+ALTER TABLE mytable
+DROP column_to_be_dropped;
+#+END_SRC
+
+* Renaming table
+
+You can rename table like this:
+
+#+BEGIN_SRC sql
+ALTER TABLE mytable
+RENAME TO new_table_name;
+#+END_SRC
